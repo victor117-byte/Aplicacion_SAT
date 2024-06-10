@@ -10,19 +10,14 @@ import pandas as pd
 
 def ejecutar_script(exe_path, fecha_limite=""):
     try:
-        # Ejecutar el archivo .exe con el parámetro y capturar la salida
-        result = subprocess.run([exe_path, '--fecha_limite', fecha_limite], capture_output=True, text=True)
-        # Verificar si la ejecución fue exitosa
-        if result.returncode == 0:
-            # Si la ejecución fue exitosa, devolver un DataFrame con valor 1
-            return pd.DataFrame({'Resultado': [1]})
-        else:
-            # Si hubo algún problema en la ejecución, devolver un DataFrame con valor 0
-            return pd.DataFrame({'Resultado': [0]})
-    except Exception as e:
-        # Manejar cualquier excepción que pueda ocurrir durante la ejecución
+        # Ejecutar el archivo .exe con el parámetro
+        subprocess.run([exe_path, '--fecha_limite', fecha_limite], check=True)
+        # Si la ejecución no arroja excepciones, significa que fue exitosa
+        return pd.DataFrame({'Resultado': [True]})
+    except subprocess.CalledProcessError as e:
+        # Si la ejecución arroja una excepción, significa que hubo un error
         print("Error:", e)
-        return pd.DataFrame({'Resultado': [0]})
+        return pd.DataFrame({'Resultado': [False]})
 
 # Ruta del ejecutable
 exe_path = r'C:\Users\proyectosat\Documents\Aplicacion_SAT\dist\script_AppSat.exe'

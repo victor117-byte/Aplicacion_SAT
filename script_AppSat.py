@@ -17,9 +17,9 @@ def main(fecha_limite=None):
 
     # rutas provicionales
     path_declaraciones = r"\\192.168.1.201\declaraciones\Presentadas en el ejercicio 2024"
-    path_info_contribuyente = r"\\192.168.1.201\avisos al rfc\INFORMACION_CONTRIBUYENTE"
+    path_info_contribuyente = r"\\192.168.1.201\avisos al rfc"
 
-    rutas = [path_declaraciones, path_info_contribuyente]
+    rutas = [path_info_contribuyente]
 
     # Crear instancia de Clasificador_Archivos con fecha_limite como parámetro si se proporciona
     if fecha_limite:

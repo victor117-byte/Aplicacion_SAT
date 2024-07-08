@@ -23,7 +23,7 @@ def ejecutar_script(exe_path, fecha_limite=""):
 exe_path = r'C:\Users\proyectosat\Documents\Aplicacion_SAT\dist\script_AppSat.exe'
 
 # Parámetro fecha límite
-fecha_limite = "2024-01-01"
+fecha_limite = "2024-06-24"
 
 # Llamar a la función para ejecutar el script y obtener el DataFrame resultante
 resultado_df = ejecutar_script(exe_path, fecha_limite)

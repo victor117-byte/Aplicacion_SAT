@@ -11,6 +11,7 @@ host = "localhost"
 # connection_url = f"postgresql://foretagbi:foretagbi@localhost/foretagbi"
 connection_url = f"postgresql://postgres:Foretagbi@localhost/postgres"
 
+
 # Crear una instancia de motor SQLAlchemy
 engine = create_engine(connection_url)
 

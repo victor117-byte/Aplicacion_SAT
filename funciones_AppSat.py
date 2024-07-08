@@ -817,23 +817,26 @@ def exportDataOpinionCumplimiento(pdf_txt, path_pdf, Tipo_pdf, conexion1, conexi
         # DATOS GENERALES
 
         # Folio
+        folio = re.search('R.F.C.(.+?\s)(.+?\s)(.+?\s)Respuesta', txt).group(1)
+        RFC = re.search('R.F.C.(.+?\s)(.+?\s)(.+?\s)Respuesta', txt).group(2)
         try:
-            folio = re.search('Folio.(.+?\s)(.+?\s)Respuesta', txt).group(2)
-            # print(f'Folio: {folio} Tiene una longitud de: ', len(folio))
+            texto_estimado_contribuyente = re.search("Estimado contribuyente.(.+?\s)Revisión practicada",txt).group(1)
+            estado = re.findall('POSITIVO', texto_estimado_contribuyente)[0]
         except:
-            folio = ""
-        # Clave RFC
-        try:
-            RFC = re.search('Folio.(.+?\s)(.+?\s)Respuesta', txt).group(1)
-            # print(f'RFC: {RFC} Tiene una longitud de: ', len(RFC))
-        except:
-            RFC = ""
+            try:
+                estado = re.findall('NEGATIVO', texto_estimado_contribuyente)[0]
+            except:
+                try:
+                    estado = re.findall('SIN OBLIGACIONES FISCALES', texto_estimado_contribuyente)[0]
+                except:
+                    estado = ""
             
-        column_names=["Tipo_pdf","RFC", "Folio", "Path"]
+        column_names=["Tipo_pdf","RFC", "Folio","Estado", "Path"]
         valor=[
             Tipo_pdf,
             RFC,
             folio,
+            estado,
             path_pdf
         ]
         df = pd.DataFrame([valor], columns=column_names)
